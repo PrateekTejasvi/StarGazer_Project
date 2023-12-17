@@ -1,81 +1,46 @@
 import {
-  View,
-  TextInput,
-  SafeAreaView,
-  TouchableOpacity,
-  Dimensions,
   StyleSheet,
   Text,
+  View,
+  SafeAreaView,
+  TouchableOpacity,
+  TextInput,
   Image,
 } from "react-native";
-import React, { useState, useEffect } from "react";
-import { Card, Icon } from "react-native-elements";
+import React, { useEffect, useState } from "react";
 import tw from "twrnc";
-import {
-  getAuth,
-  onAuthStateChanged,
-  setPersistence,
-  GoogleAuthProvider,
-  browserSessionPersistence,
-} from "firebase/auth";
-import { useNavigation } from "@react-navigation/native";
+import { Card, Icon } from "react-native-elements";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { auth } from "../firebase";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Login() {
-  const [email, setEmail] = useState("");
+const Login = () => {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const navigation = useNavigation();
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        navigation.replace("home", { email: user.email });
-      }
-    });
-
-    return unsubscribe;
-  }, []);
-  setPersistence(auth, browserSessionPersistence)
-    .then(() => {
-      const provider = new GoogleAuthProvider();
-      // In memory persistence will be applied to the signed in Google user
-      // even though the persistence was set to 'none' and a page redirect
-      // occurred.
-      return signInWithEmailAndPassword(auth, email, password);
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
-
   const handleLogin = () => {
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log("Logged in with:", user.email);
-        toast.success("Logged in", { position: "bottom-right", theme: "dark" });
-      })
-      .catch((error) =>
-        toast.error("Wrong Credentials", {
-          position: "top-right",
-          theme: "dark",
-        }),
-      );
+    const encodeuser = encodeURIComponent(username);
+    const encodepass = encodeURIComponent(password);
+    const url = `http://localhost:5000/login/user?username=${encodeuser}&password=${encodepass}`;
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    })
+      .then((r) => r.json())
+      .then((data) => console.log(data));
   };
-
   return (
     <SafeAreaView style={tw.style("items-center justify-center bg-black")}>
-      <View style={tw`items-center justify-center`}>
+      <View style={tw`items-center justify-center `}>
         <Image
-          style={tw`h-60 w-100`}
+          style={tw`h-50 w-100`}
           source={require("../assets/constellations.jpg")}
         />
+
         <Text
-          style={tw.style("text-xl text-white font-bold text-center pt-5 ", {
+          style={tw.style("text-xl text-black font-bold text-center pt-5 ", {
             fontSize: 40,
           })}
         >
@@ -106,8 +71,8 @@ export default function Login() {
                 autoCapitalize="none"
                 autoCorrect={false}
                 type="email"
-                value={email}
-                onChangeText={(text) => setEmail(text)}
+                value={username}
+                onChangeText={(text) => setUsername(text)}
               />
             </View>
 
@@ -154,7 +119,9 @@ export default function Login() {
       </View>
     </SafeAreaView>
   );
-}
+};
+
+export default Login;
 
 const styles = StyleSheet.create({
   Login: {
@@ -172,28 +139,3 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
 });
-/*
- onAuthStateChanged(auth2, (user) => {
-    let perms = user.email.slice(email.indexOf('@') + 1);
-    
-    console.log(perms)
-    if(perms === "gmail.com"){
-      setAccess(perms)
-      console.log(access)
-    }
-    else if (perms === "unsc.com"){
-      setAccess('unsc') 
-
-    }
-    else if(perms === "ls.com"){
-      setAccess('ls') 
-
-    }
-    else if(perms === "unhrc.com"){
-      setAccess('unhrc')
-    }
-    else if(perms==="disec.com"){
-      setAccess('disec')
-    }
-  });
-*/
