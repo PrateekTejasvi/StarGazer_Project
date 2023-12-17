@@ -1,19 +1,29 @@
-from flask import Flask,jsonify
-from flask_marshmallow import Marshmallow
+from flask import Flask,request,jsonify
 from flask_cors import CORS
+import mysql.connector as mysql
+
+cxn = mysql.connect(user="root",password="sql123",database="project",host="localhost");
+cursor = cxn.cursor()
 
 app = Flask(__name__)
 CORS(app)
-mr = Marshmallow(app)
+
+@app.route('/api/user',methods=['POST']) 
+def handle_user_data():
+    if request.method == 'POST':
+        data = request.get_json()
+        
+        username = data.get('username')
+        email = data.get('email')
+        
+        response_data = {
+            'message': 'Data received successfully!',
+            'username': username,
+            'email': email,
+        }
+        
+        return jsonify(response_data)
 
 
-@app.route('/',methods= ['GET'])
-def test():
-    return "w"
-
-if __name__ == "__main__":
-    app.run(host="192.168.0.108",port=3000,debug=True)
-
-
-
-
+if __name__ == "__main__" : 
+    app.run(debug = True)
