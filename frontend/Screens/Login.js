@@ -12,8 +12,6 @@ import React, { useState, useEffect } from "react";
 import { Card, Icon } from "react-native-elements";
 import tw from "twrnc";
 import {
-  getAuth,
-  onAuthStateChanged,
   setPersistence,
   GoogleAuthProvider,
   browserSessionPersistence,
@@ -31,7 +29,7 @@ export default function Login() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        navigation.replace("home", { email: user.email });
+        navigation.replace("Home", { email: user.email });
       }
     });
 
@@ -40,13 +38,9 @@ export default function Login() {
   setPersistence(auth, browserSessionPersistence)
     .then(() => {
       const provider = new GoogleAuthProvider();
-      // In memory persistence will be applied to the signed in Google user
-      // even though the persistence was set to 'none' and a page redirect
-      // occurred.
       return signInWithEmailAndPassword(auth, email, password);
     })
     .catch((error) => {
-      // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
     });
