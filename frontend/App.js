@@ -1,20 +1,16 @@
 import { StyleSheet, Text, View } from "react-native";
 import Login from "./Screens/Login";
 import Home from "./Screens/Home";
+import Profile from "./Screens/Profile";
+import Register from "./Screens/Register";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createDrawerNavigator } from "@react-navigation/drawer";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
-  const Drawer = createDrawerNavigator();
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <Drawer.Navigator initalRouteName="Home">
-          <Drawer.Screen name="Home" component={Home} />
-          <Drawer.Screen name="Login" component={Login} />
-        </Drawer.Navigator>
         <Stack.Navigator>
           <Stack.Screen
             name="Login"
@@ -22,8 +18,18 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="Home"
             component={Home}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Profile"
+            component={Profile}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

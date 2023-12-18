@@ -2,9 +2,6 @@ import {
   View,
   SafeAreaView,
   StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  Dimensions,
   Text,
   ImageBackground,
 } from "react-native";
@@ -12,17 +9,8 @@ import React from "react";
 import NavOptions from "../Components/NavOptions";
 import tw from "twrnc";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { Icon } from "react-native-elements";
 
 const Home = () => {
-  const navigation = useNavigation();
-
-  const {
-    params: { email },
-  } = useRoute();
-  let perms = email.slice(email.indexOf("@") + 1);
-  console.log(perms);
-
   return (
     <>
       <SafeAreaView style={tw.style("flex-1 bg-white")}>
@@ -34,12 +22,14 @@ const Home = () => {
           <View
             style={tw.style("bg-white flex-row items-center justify-center")}
           >
-            <Text style={tw.style("font-bold text-black", { fontSize: 30 })}>
-              Home{" "}
+            <Text
+              style={tw.style("font-bold text-black pt-5", { fontSize: 30 })}
+            >
+              Explore
             </Text>
           </View>
           <View style={{ paddingLeft: 10, flex: 1 }}>
-            <NavOptions perms={perms} />
+            <NavOptions perms={"test"} />
           </View>
         </ImageBackground>
       </SafeAreaView>
@@ -53,5 +43,7 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     justifyContent: "center",
+    width: "100%",
+    height: "100%",
   },
 });

@@ -1,29 +1,28 @@
 import {
   View,
-  Text,
   TouchableOpacity,
   Image,
-  ScrollView,
   StyleSheet,
   Dimensions,
-  SafeAreaView,
 } from "react-native";
 import React, { useEffect } from "react";
 import tw from "twrnc";
 import { useNavigation } from "@react-navigation/native";
 import { Card } from "react-native-elements";
+import * as Animated from "react-native-animatable";
 
-const NavOptions = ({ perms }) => {
+const NavOptions = () => {
   const navigation = useNavigation();
-  console.log(perms);
   return (
     <View
       style={tw.style("flex-1 items-center justify-center", {
         alignSelf: "center",
       })}
     >
-      <View
+      <Animated.View
         animation="slideInLeft"
+        iterationCount={1}
+        delay={100}
         style={tw`flex-row items-center justify-center pt-10`}
       >
         <TouchableOpacity
@@ -35,21 +34,21 @@ const NavOptions = ({ perms }) => {
           <Card containerStyle={styles.Card}>
             <Card.Title
               style={tw.style("font-bold text-xl text-black text-center", {
-                fontSize: 33,
+                fontSize: 30,
               })}
             >
-              Test
+              Astronomy Picture of the Day!
             </Card.Title>
             <Card.FeaturedSubtitle
-              style={tw.style("text-black  text-xs pr-20 text-center px-2", {
+              style={tw.style("text-black  text-xs pr-20 text-center px-2 text-gray-400 pb-2", {
                 fontSize: 18,
               })}
             >
-              Test1
+              Picture of the day taken from NASA's telescopes
             </Card.FeaturedSubtitle>
             <Image
-              source={require("../assets/constellations.jpg")}
-              style={tw.style("h-40 w-64 rounded mx-5", {
+              source={require("../assets/apod.jpg")}
+              style={tw.style("h-40 w-54 rounded mx-5 pt-10", {
                 alignSelf: "center",
               })}
             />
@@ -65,17 +64,17 @@ const NavOptions = ({ perms }) => {
           <Card containerStyle={styles.Card}>
             <Card.Title
               style={tw.style("font-bold text-lg text-black text-center", {
-                fontSize: 33,
+                fontSize: 30,
               })}
             >
-              Test
+              Pictures from Mars!
             </Card.Title>
             <Card.FeaturedSubtitle
-              style={tw.style("text-black text-xs pr-20 text-center px-2", {
+              style={tw.style("text-black text-xs pr-20 text-center px-2 text-gray-400", {
                 fontSize: 18,
               })}
             >
-              Something else here
+              The various cameras on board the mars rover
             </Card.FeaturedSubtitle>
             <Image
               source={require("../assets/constellations.jpg")}
@@ -85,8 +84,13 @@ const NavOptions = ({ perms }) => {
             />
           </Card>
         </TouchableOpacity>
-      </View>
-      <View style={tw`flex-row items-center justify-center pt-5`}>
+      </Animated.View>
+      <Animated.View
+        style={tw`flex-row items-center justify-center pt-5`}
+        iterationCount={1}
+        animation="slideInRight"
+        delay={250}
+      >
         <TouchableOpacity
           style={tw`pt-5 items-center`}
           onPress={() =>
@@ -96,10 +100,10 @@ const NavOptions = ({ perms }) => {
           <Card containerStyle={styles.Card}>
             <Card.Title
               style={tw.style("font-bold text-lg text-black text-center", {
-                fontSize: 33,
+                fontSize: 30,
               })}
             >
-              BlahBlah
+              Exoplanets thing
             </Card.Title>
             <Card.FeaturedSubtitle
               style={tw.style("text-black text-xs pr-10 text-center px-2", {
@@ -125,7 +129,7 @@ const NavOptions = ({ perms }) => {
           <Card containerStyle={styles.Card}>
             <Card.Title
               style={tw.style("font-bold text-lg text-black text-center px-2", {
-                fontSize: 33,
+                fontSize: 30,
               })}
             >
               Woah
@@ -145,7 +149,7 @@ const NavOptions = ({ perms }) => {
             />
           </Card>
         </TouchableOpacity>
-      </View>
+      </Animated.View>
     </View>
   );
 };
