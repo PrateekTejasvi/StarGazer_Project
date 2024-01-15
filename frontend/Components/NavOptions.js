@@ -27,7 +27,9 @@ const NavOptions = () => {
       >
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate("CSc", { choice: "Test", perms: perms })
+            navigation.navigate("Apod", {
+              header: "Astronomy Picture of the day!",
+            })
           }
           style={tw`items-center justify-center`}
         >
@@ -40,9 +42,12 @@ const NavOptions = () => {
               Astronomy Picture of the Day!
             </Card.Title>
             <Card.FeaturedSubtitle
-              style={tw.style("text-black  text-xs pr-20 text-center px-2 text-gray-400 pb-2", {
-                fontSize: 18,
-              })}
+              style={tw.style(
+                "text-black  text-xs pr-20 text-center px-2 text-gray-400 pb-2",
+                {
+                  fontSize: 18,
+                },
+              )}
             >
               Picture of the day taken from NASA's telescopes
             </Card.FeaturedSubtitle>
@@ -55,12 +60,7 @@ const NavOptions = () => {
           </Card>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={tw``}
-          onPress={() =>
-            navigation.navigate("CSc", { choice: "Test", perms: perms })
-          }
-        >
+        <TouchableOpacity style={tw``} onPress={() => console.log("mars")}>
           <Card containerStyle={styles.Card}>
             <Card.Title
               style={tw.style("font-bold text-lg text-black text-center", {
@@ -70,14 +70,17 @@ const NavOptions = () => {
               Pictures from Mars!
             </Card.Title>
             <Card.FeaturedSubtitle
-              style={tw.style("text-black text-xs pr-20 text-center px-2 text-gray-400", {
-                fontSize: 18,
-              })}
+              style={tw.style(
+                "text-black text-xs pr-20 text-center px-2 text-gray-400 pb-3",
+                {
+                  fontSize: 18,
+                },
+              )}
             >
               The various cameras on board the mars rover
             </Card.FeaturedSubtitle>
             <Image
-              source={require("../assets/constellations.jpg")}
+              source={require("../assets/mars.jpg")}
               style={tw.style("h-40 w-64 rounded mx-5", {
                 alignSelf: "center",
               })}
@@ -93,9 +96,7 @@ const NavOptions = () => {
       >
         <TouchableOpacity
           style={tw`pt-5 items-center`}
-          onPress={() =>
-            navigation.navigate("CSc", { choice: "BlahBlah", perms: perms })
-          }
+          onPress={() => console.log("Exo")}
         >
           <Card containerStyle={styles.Card}>
             <Card.Title
@@ -103,17 +104,20 @@ const NavOptions = () => {
                 fontSize: 30,
               })}
             >
-              Exoplanets thing
+              Exoplanets!
             </Card.Title>
             <Card.FeaturedSubtitle
-              style={tw.style("text-black text-xs pr-10 text-center px-2", {
-                fontSize: 18,
-              })}
+              style={tw.style(
+                "text-gray-400 text-xs pr-10 text-center px-2 pb-3",
+                {
+                  fontSize: 18,
+                },
+              )}
             >
-              Woah{" "}
+              From NASA ExoPlanet database
             </Card.FeaturedSubtitle>
             <Image
-              source={require("../assets/constellations.jpg")}
+              source={require("../assets/exoplanet.jpg")}
               style={tw.style("h-40 w-64 rounded mx-5 items-center", {
                 alignSelf: "center",
               })}
@@ -122,9 +126,7 @@ const NavOptions = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={tw`pt-5 items-center`}
-          onPress={() =>
-            navigation.navigate("CSc", { choice: "woah", perms: perms })
-          }
+          onPress={() => console.log("test")}
         >
           <Card containerStyle={styles.Card}>
             <Card.Title
@@ -132,17 +134,20 @@ const NavOptions = () => {
                 fontSize: 30,
               })}
             >
-              Woah
+              Star Maps
             </Card.Title>
             <Card.FeaturedSubtitle
-              style={tw.style("text-black text-xs pr-10 text-center px-2", {
-                fontSize: 18,
-              })}
+              style={tw.style(
+                "text-gray-400 text-xs pr-10 text-center px-2 pb-3",
+                {
+                  fontSize: 18,
+                },
+              )}
             >
-              ANother something here
+              Generate a star map for a given location
             </Card.FeaturedSubtitle>
             <Image
-              source={require("../assets/constellations.jpg")}
+              source={require("../assets/star.png")}
               style={tw.style(
                 "h-40 w-64 rounded mx-20 items-center justify-center",
               )}

@@ -28,24 +28,32 @@ export default function Login() {
       .createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
         authUser.user.update({
-          displayName: name,
+        
         });
         var formdata = new FormData();
         formdata.append("email",email)
         formdata.append("password",password)
+        var locationForm = new FormData();
         formdata.append("location",location)
         var requestOpts = {
           method :'POST',
           body :formdata,
           redirect:'follow'
         }
+        var requestOptsLoctation = {
+          method : 'POST',
+          body:locationForm,
+          redirect:'follow'
+        }
       fetch("http://localhost:5000/register", requestOpts)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
+      fetch("http://locahost:5000/location",requestOptsLoctation)
 
       })
       .catch((error) => alert(error.message));
+      
   };
   return (
     <SafeAreaView style={tw.style("flex-1 bg-white")}>

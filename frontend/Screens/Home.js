@@ -25,11 +25,11 @@ const Home = () => {
             <Text
               style={tw.style("font-bold text-black pt-5", { fontSize: 30 })}
             >
-              Explore
+              Explore!
             </Text>
           </View>
           <View style={{ paddingLeft: 10, flex: 1 }}>
-            <NavOptions perms={"test"} />
+            <NavOptions />
           </View>
         </ImageBackground>
       </SafeAreaView>

@@ -19,7 +19,6 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { auth } from "../firebase";
-import { ToastContainer, toast } from "react-toastify";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -52,21 +51,21 @@ export default function Login() {
       .then((userCredentials) => {
         const user = userCredentials.user;
         var formdata = new FormData();
-        formdata.append("email",email);
-        formdata.append("password",password);
+        formdata.append("email", email);
+        formdata.append("password", password);
 
         var requestOptions = {
-          method: 'POST',
+          method: "POST",
           body: formdata,
-          redirect: 'follow'
+          redirect: "follow",
         };
 
-  fetch("http://localhost:5000/signin", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-       
-  }).catch((error) => console.log(error));
+        fetch("http://localhost:5000/signin", requestOptions)
+          .then((response) => response.text())
+          .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -81,7 +80,6 @@ export default function Login() {
       }}
     >
       <SafeAreaView style={tw.style("items-center justify-center")}>
-        <ToastContainer />
         <View style={tw`items-center justify-center`}>
           <Image
             style={tw`h-60 w-100`}

@@ -3,6 +3,7 @@ import Login from "./Screens/Login";
 import Home from "./Screens/Home";
 import Profile from "./Screens/Profile";
 import Register from "./Screens/Register";
+import Apod from "./Screens/Apod";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -30,6 +31,11 @@ export default function App() {
           <Stack.Screen
             name="Profile"
             component={Profile}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Apod"
+            component={Apod}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
