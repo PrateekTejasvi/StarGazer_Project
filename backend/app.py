@@ -83,6 +83,17 @@ def Exists(email):
         return True
     else:
         return False
+    
+def checkLocations(location):
+    cursor.execute(f"select * from valid_locations where location='{location}'")
+    data = cursor.fetchall()
+    if data == None:
+        return False 
+    if len(data) > 0:
+        print("Data exists!")
+        return True
+    else:
+        return False
 
 
 def addToDb(email,password,location):
@@ -117,7 +128,7 @@ def createTable():
         for x in m:
             if x == "user_data":
                 break
-            elif x == "loin":
+            elif x == "login":
                 break
 
 
