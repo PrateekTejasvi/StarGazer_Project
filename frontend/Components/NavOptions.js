@@ -27,9 +27,7 @@ const NavOptions = () => {
       >
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate("Apod", {
-              header: "Astronomy Picture of the day!",
-            })
+            navigation.navigate("Apod") 
           }
           style={tw`items-center justify-center`}
         >
@@ -60,7 +58,7 @@ const NavOptions = () => {
           </Card>
         </TouchableOpacity>
 
-        <TouchableOpacity style={tw``} onPress={() => console.log("mars")}>
+        <TouchableOpacity style={tw``} onPress={() => navigation.navigate('Rover')}>
           <Card containerStyle={styles.Card}>
             <Card.Title
               style={tw.style("font-bold text-lg text-black text-center", {
@@ -96,7 +94,7 @@ const NavOptions = () => {
       >
         <TouchableOpacity
           style={tw`pt-5 items-center`}
-          onPress={() => console.log("Exo")}
+          onPress={() => navigation.navigate("Exp")}
         >
           <Card containerStyle={styles.Card}>
             <Card.Title
@@ -126,7 +124,7 @@ const NavOptions = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={tw`pt-5 items-center`}
-          onPress={() => console.log("test")}
+          onPress={() => navigation.navigate("StarMap")}
         >
           <Card containerStyle={styles.Card}>
             <Card.Title

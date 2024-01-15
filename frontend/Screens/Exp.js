@@ -5,7 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
-const Apod = () => {
+const Exp = () => {
   const navigation = useNavigation();
   return (
     <View style={tw`flex-1 flex-row justify-center pt-5`}>
@@ -15,12 +15,12 @@ const Apod = () => {
       </TouchableOpacity>
       </View>
       <View style={tw`flex-row`}>
-        <Text style={tw.style('font-bold text-xl items-center justify-center')}>Astronomy picture of the day!</Text> 
+        <Text style={tw.style('font-bold text-xl items-center justify-center')}>ExoPlanet Archives</Text> 
       </View>
     </View>
   );
 };
 
-export default Apod;
+export default Exp
 
 const styles = StyleSheet.create({});

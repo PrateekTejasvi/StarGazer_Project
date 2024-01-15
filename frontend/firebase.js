@@ -3,6 +3,8 @@
 // https://firebase.google.com/docs/web/setup#available-libraries
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import {getStorage} from "firebase/storage";
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -23,5 +25,6 @@ if (firebase.apps.length === 0) {
 }
 
 const auth = firebase.auth();
+const storage = getStorage(app);
 
-export { auth };
+export { auth ,storage};
