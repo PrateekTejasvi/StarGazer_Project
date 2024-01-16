@@ -7,6 +7,7 @@ import Apod from "./Screens/Apod";
 import Rover from "./Screens/Rover";
 import Exp from "./Screens/Exp";
 import StarMap from "./Screens/StarMap";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -36,6 +37,7 @@ export default function App() {
             component={Profile}
             options={{ headerShown: false }}
           />
+         
           <Stack.Screen
             name="Apod"
             component={Apod}
