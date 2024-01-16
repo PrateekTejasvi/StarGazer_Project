@@ -5,9 +5,9 @@ firebase_admin.initialize_app(cred, {
     'storageBucket': 'stargazer-e1cd8.appspot.com'
 })
 
-def UploadImage(filename):
+def UploadImage(filename,folder):
     bucket=storage.bucket()
-    blob = bucket.blob(filename)
+    blob = bucket.blob(f'{folder}/'+ filename)
     blob.upload_from_filename(filename)
     blob.make_public()
 
