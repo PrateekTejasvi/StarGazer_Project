@@ -7,6 +7,15 @@ import firebaseImage
 from datetime import date 
 from datetime import timedelta
 import starmap
+from geopy import Nominatim
+
+
+locator = Nominatim(user_agent='test')
+location = 'Bangalore, KA'
+location = locator.geocode(location)
+lat, long = location.latitude, location.longitude
+print(lat,long)
+
 current_date = date.today() - timedelta(days=1)
 
 cxn = mysql.connect(user="root",password="sql123",database="project",host="localhost");
@@ -35,6 +44,7 @@ def register():
     password = request.form['password']
     location = request.form['location']
     print(email,password,location)
+    addTocoordinates(email,password,lat,long)
     if(Exists(email)):
         return json.dumps({'Exists':True})
     else:
@@ -166,6 +176,12 @@ def addToLogin(email,password):
         cursor.execute('commit;')
     except Exception as E:
         print(E)
+
+def addTocoordinates(email,password,latitude,longitude):
+    cursor.execute(f"insert into coordinates vales('{email}','{password}',{latitude},{longitude});")
+    cursor.execute(f"commit;")
+
+    
     
 
 #create sql table for login 
