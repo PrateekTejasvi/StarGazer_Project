@@ -4,13 +4,28 @@ import {
   StyleSheet,
   Text,
   ImageBackground,
+  TouchableOpacity
 } from "react-native";
-import React from "react";
+import React,{useState} from "react";
 import NavOptions from "../Components/NavOptions";
 import tw from "twrnc";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { NavigationContainer, useNavigation, useRoute } from "@react-navigation/native";
+import { auth} from "../firebase";
 
 const Home = () => {
+  const navigation = useNavigation()
+  const [out,setOut] = useState(false);
+  const Logout = () => {
+    auth.signOut()
+    .catch(error => {
+      console.log(error)
+    })
+    setOut(true)
+  
+  }
+  if(out){
+    navigation.replace("Login")
+  }
   return (
     <>
       <SafeAreaView style={tw.style("flex-1 bg-white")}>
@@ -32,6 +47,20 @@ const Home = () => {
             <NavOptions />
           </View>
         </ImageBackground>
+
+              <View style={tw`pt-2 px-2 items-center justify-center`}>
+                <TouchableOpacity
+                  style={tw.style("p-3 my-10 items-center bg-black rounded ", {
+                    width: 250,
+                    backgroundColor: "black",
+                  })}
+                  onPress={Logout}
+                >
+                  <Text style={tw.style("font-bold text-xl text-white")}>
+                    Logout
+                  </Text>
+                </TouchableOpacity>
+              </View>
       </SafeAreaView>
     </>
   );

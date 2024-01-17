@@ -4,10 +4,8 @@ import Home from "./Screens/Home";
 import Profile from "./Screens/Profile";
 import Register from "./Screens/Register";
 import Apod from "./Screens/Apod";
-import Rover from "./Screens/Rover";
-import Exp from "./Screens/Exp";
+import Select_Date from "./Screens/Select_Date";
 import StarMap from "./Screens/StarMap";
-
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -41,25 +39,18 @@ export default function App() {
           <Stack.Screen
             name="Apod"
             component={Apod}
-            options={{ headerShown: false}}
+            options={{ headerShown: true,headerTitle:'Astronomy Picture of the Day!'}}
           />
-          <Stack.Screen 
-            name = "Rover"
-            component={Rover}
-            options={
-              {headerShown:false
-            
-            
-            }}
-            />
-            <Stack.Screen 
-              name ="Exp"
-              component={Exp}
-              options={{headerShown:false}}/>
+         <Stack.Screen 
+          name="options"
+          component={Select_Date}
+          options={{headerShown:false}}
+          />
+           
             <Stack.Screen 
               name="StarMap"
               component={StarMap}
-              options={{headerShown:false}}/>
+              options={{headerShown:true,headerTitle:'Generate a star map from a given location and time'}}/>
         </Stack.Navigator>
       </NavigationContainer>
     </View>

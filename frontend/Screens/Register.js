@@ -15,46 +15,43 @@ import { useNavigation } from "@react-navigation/native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [location, setLocation] = useState("");
-
-
+  const [loading,setLoading] = useState(false);
   const navigation = useNavigation();
-  const register = () => {
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((authUser) => {
-        authUser.user.update({
-        
-        });
-        var formdata = new FormData();
-        formdata.append("email",email)
-        formdata.append("password",password)
-        var locationForm = new FormData();
-        formdata.append("location",location)
-        var requestOpts = {
-          method :'POST',
-          body :formdata,
-          redirect:'follow'
-        }
-        var requestOptsLoctation = {
-          method : 'POST',
-          body:locationForm,
-          redirect:'follow'
-        }
-      fetch("http://localhost:5000/register", requestOpts)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
-      fetch("http://locahost:5000/location",requestOptsLoctation)
+  
+    const register = async () =>{
+      setLoading(true)
+      try {
+        const response = await createUserWithEmailAndPassword(auth,email,password);
+        console.log(response);
 
-      })
-      .catch((error) => alert(error.message));
-      
-  };
+      }
+      catch (error){
+        console.log(error)
+      }
+      finally{
+        setLoading(false);
+  var formdata = new FormData();
+  formdata.append("email", email)
+  formdata.append("password", password)
+  formdata.append("location", location)
+  var requestOpts = {
+    method: 'POST',
+    body: formdata,
+    redirect: 'follow'
+  }
+  fetch("http://localhost:5000/register", requestOpts)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+      }
+    
+    }
   return (
     <SafeAreaView style={tw.style("flex-1 bg-white")}>
       <Animatable.View style={tw`items-center justify-center flex-1`}>

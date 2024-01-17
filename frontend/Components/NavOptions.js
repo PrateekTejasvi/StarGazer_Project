@@ -58,33 +58,6 @@ const NavOptions = () => {
           </Card>
         </TouchableOpacity>
 
-        <TouchableOpacity style={tw``} onPress={() => navigation.navigate('Rover')}>
-          <Card containerStyle={styles.Card}>
-            <Card.Title
-              style={tw.style("font-bold text-lg text-black text-center", {
-                fontSize: 30,
-              })}
-            >
-              Pictures from Mars!
-            </Card.Title>
-            <Card.FeaturedSubtitle
-              style={tw.style(
-                "text-black text-xs pr-20 text-center px-2 text-gray-400 pb-3",
-                {
-                  fontSize: 18,
-                },
-              )}
-            >
-              The various cameras on board the mars rover
-            </Card.FeaturedSubtitle>
-            <Image
-              source={require("../assets/mars.jpg")}
-              style={tw.style("h-40 w-64 rounded mx-5", {
-                alignSelf: "center",
-              })}
-            />
-          </Card>
-        </TouchableOpacity>
       </Animated.View>
       <Animated.View
         style={tw`flex-row items-center justify-center pt-5`}
@@ -94,37 +67,7 @@ const NavOptions = () => {
       >
         <TouchableOpacity
           style={tw`pt-5 items-center`}
-          onPress={() => navigation.navigate("Exp")}
-        >
-          <Card containerStyle={styles.Card}>
-            <Card.Title
-              style={tw.style("font-bold text-lg text-black text-center", {
-                fontSize: 30,
-              })}
-            >
-              Exoplanets!
-            </Card.Title>
-            <Card.FeaturedSubtitle
-              style={tw.style(
-                "text-gray-400 text-xs pr-10 text-center px-2 pb-3",
-                {
-                  fontSize: 18,
-                },
-              )}
-            >
-              From NASA ExoPlanet database
-            </Card.FeaturedSubtitle>
-            <Image
-              source={require("../assets/exoplanet.jpg")}
-              style={tw.style("h-40 w-64 rounded mx-5 items-center", {
-                alignSelf: "center",
-              })}
-            />
-          </Card>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={tw`pt-5 items-center`}
-          onPress={() => navigation.navigate("StarMap")}
+          onPress={() => navigation.navigate("options")}
         >
           <Card containerStyle={styles.Card}>
             <Card.Title

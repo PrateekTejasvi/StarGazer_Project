@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View ,ScrollView} from "react-native";
+import { StyleSheet, Text, View ,SafeAreaView} from "react-native";
 import React,{useEffect, useState} from "react";
 import tw from "twrnc";
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -6,6 +6,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { getStorage, ref, listAll } from "firebase/storage";
 import ImageCard from "./ImageCard";
+import ExpCard from "../Components/ExpCard";
+import { Card } from "react-native-elements";
 
 const Apod = () => {
   const navigation = useNavigation();
@@ -45,33 +47,48 @@ fetch("http://localhost:5000/request/APOD", requestOptions)
 
       })
   }, [])
-  let no_files = false;
-  if (files.length === 0) {
-    no_files = true
-  }
 
 
   return (
-    <View style={tw`flex-1 flex-row justify-center pt-5`}>
-      <View style={{alignItems:'flex-start'}}>
-      <TouchableOpacity style={tw.style('px-4')} onPress={()=>navigation.goBack()}>
-        <Ionicons name="arrow-back-outline" size={25}/>
-      </TouchableOpacity>
-      </View>
-      <View style={tw`flex-row`}>
-        <Text style={tw.style('font-bold text-xl items-center justify-center')}>Astronomy picture of the day!</Text> 
-      <ScrollView showsHorizontalScrollIndicator={false} style={tw`pt-5 z-50 `} contentContainerStyle={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
+    <SafeAreaView style={tw`items-center justify-center`}>
+        <View style={tw`flex-1 items-center justify-center`} >
           <View style={{ bottom: 24 }}>
             {files?.map(file => (
               <ImageCard key={file} file_name={file.name}/>
             ))}
           </View>
-        </ScrollView>
-      </View>
-    </View>
+          <View style={{bottom:10}}>
+            {files?.map(file => (
+              <ExpCard key={file} file_name={file.name}/>
+            ))}  
+          </View>
+          </View>
+    </SafeAreaView>
   );
 };
 
 export default Apod;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+ 
+});
+
+/*
+    <View style={tw`flex-1 flex-row pt-5`}>
+      <View style={tw.style('justify-center')}>
+      <TouchableOpacity style={tw.style('px-4')} onPress={()=>navigation.goBack()}>
+        <Ionicons name="arrow-back-outline" size={25}/>
+      </TouchableOpacity>
+      <View style={tw`flex-row`}>
+        <Text style={tw.style('font-bold text-xl items-center justify-center')}>Astronomy picture of the day!</Text> 
+      </View>
+      </View>
+        <View style={tw`flex-1 items-center justify-center`} >
+          <View style={{ bottom: 24 }}>
+            {files?.map(file => (
+              <ImageCard key={file} file_name={file.name}/>
+            ))}
+          </View>
+          </View>
+      </View>
+*/

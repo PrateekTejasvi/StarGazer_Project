@@ -67,7 +67,7 @@ export default function Login() {
       })
       .catch((error) => console.log(error));
   };
-
+  
   return (
     <ImageBackground
       source={require("../assets/background.jpeg")}

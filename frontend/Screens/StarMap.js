@@ -1,26 +1,54 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { StyleSheet, Text, View ,SafeAreaView} from "react-native";
+import React,{useEffect, useState} from "react";
 import tw from "twrnc";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { getStorage, ref, listAll } from "firebase/storage";
+import StarCard from "./StarCard";
+
 
 const StarMap = () => {
   const navigation = useNavigation();
+ 
+ const [files, setFiles] = useState([]);
+  const [names, setNames] = useState('');
+  const storage = getStorage();
+  const listRef = ref(storage, 'StarMap/');
+
+  useEffect(() => {
+    listAll(listRef)
+      .then((res) => {
+        res.prefixes.forEach((folderRef) => {
+        })
+        setFiles(res.items)
+        res.prefixes.forEach((itemsRef) => {
+          setNames(itemsRef.name);
+        })
+
+      }).catch((error) => {
+        console.log(error)
+
+      })
+  }, [])
+
+
   return (
-    <View style={tw`flex-1 flex-row justify-center pt-5`}>
-      <View style={{alignItems:'flex-start'}}>
-      <TouchableOpacity style={tw.style('px-4')} onPress={()=>navigation.goBack()}>
-        <Ionicons name="arrow-back-outline" size={25}/>
-      </TouchableOpacity>
-      </View>
-      <View style={tw`flex-row`}>
-        <Text style={tw.style('font-bold text-xl items-center justify-center')}>Generate A Star Map from given location and time</Text> 
-      </View>
-    </View>
+
+    <SafeAreaView style={tw`items-center justify-center flex-1`}>
+        <View style={tw`flex-1 items-center justify-center`} >
+          <View style={{ bottom: 24 }}>
+            {files?.map(file => (
+              <StarCard key={file} file_name={file.name}/>
+            ))}
+          </View>
+          </View>
+    </SafeAreaView>
   );
 };
 
-export default StarMap
+export default StarMap;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+ 
+});
