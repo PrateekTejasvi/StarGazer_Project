@@ -7,14 +7,14 @@ import {getStorage} from "firebase/storage";
 
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+/*const firebaseConfig = {
   apiKey: "AIzaSyC0eP89vKnwKE7HtPTuCio8uP-zUWSlEO4",
   authDomain: "stargazer-e1cd8.firebaseapp.com",
   projectId: "stargazer-e1cd8",
   storageBucket: "stargazer-e1cd8.appspot.com",
   messagingSenderId: "472476932550",
   appId: "1:472476932550:web:5320583d19e2abd97d7ac7",
-};
+};*/
 
 // Initialize Firebase
 let app;
